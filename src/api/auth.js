@@ -1,4 +1,4 @@
-import { http } from "./http";
+import { http } from "./api";
 
 export async function signup({ email, password, name }) {
   const res = await http.post("/api/auth/signup", { email, password, name });
