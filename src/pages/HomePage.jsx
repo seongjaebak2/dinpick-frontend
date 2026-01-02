@@ -3,7 +3,6 @@ import Hero from "../components/home/Hero";
 import CategoryChips from "../components/home/CategoryChips";
 import SectionGrid from "../components/home/SectionGrid";
 import Testimonials from "../components/home/Testimonials";
-import CTASection from "../components/home/CTASection";
 
 /*
   HomePage
@@ -26,9 +25,6 @@ const HomePage = () => {
 
       {/* Testimonials section */}
       <Testimonials />
-
-      {/* Call-to-action section */}
-      <CTASection />
     </Layout>
   );
 };
