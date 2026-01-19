@@ -17,11 +17,35 @@ const Hero = () => {
   const trimmedKeyword = keyword.trim();
   const isDisabled = trimmedKeyword.length === 0;
 
-  const handleSubmit = (event) => {
+  /* Smart Search Implementation */
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (isDisabled) return;
 
-    navigate(`/restaurants?keyword=${encodeURIComponent(trimmedKeyword)}`);
+    try {
+      // 1. 카카오 맵 로드 (Geocoding 사용을 위해)
+      const kakaoIcons = await import("../../utils/kakaoLoader").then(m => m.loadKakaoMaps());
+
+      const geocoder = new kakaoIcons.maps.services.Geocoder();
+
+      // 2. 주소 검색 시도
+      geocoder.addressSearch(trimmedKeyword, (result, status) => {
+        if (status === kakaoIcons.maps.services.Status.OK && result.length > 0) {
+          // 3-1. 주소/지역명인 경우 -> 좌표 기준 거리순 정렬
+          const { x, y } = result[0];
+          navigate(
+            `/restaurants?lat=${y}&lng=${x}&sort=distance&locName=${encodeURIComponent(trimmedKeyword)}`
+          );
+        } else {
+          // 3-2. 일반 키워드인 경우 -> 키워드 검색
+          navigate(`/restaurants?keyword=${encodeURIComponent(trimmedKeyword)}`);
+        }
+      });
+    } catch (error) {
+      // 로드 실패 시 일반 검색으로 fallback
+      console.error("Kakao Map Load Failed", error);
+      navigate(`/restaurants?keyword=${encodeURIComponent(trimmedKeyword)}`);
+    }
   };
 
   return (

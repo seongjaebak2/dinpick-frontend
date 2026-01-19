@@ -28,10 +28,6 @@ const Header = ({ children }) => {
 
             {isAuthenticated ? (
               <>
-                <span className="nav-user">
-                  {user?.name ? `${user.name} 님` : "로그인됨"}
-                </span>
-
                 <Link to="/me" className="nav-link">
                   마이페이지
                 </Link>
@@ -39,6 +35,10 @@ const Header = ({ children }) => {
                 <button className="nav-link nav-logout" onClick={onLogout}>
                   로그아웃
                 </button>
+
+                <span className="nav-user">
+                  {user?.name ? `${user.name} 님` : "로그인됨"}
+                </span>
               </>
             ) : (
               <>

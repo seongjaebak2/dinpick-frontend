@@ -4,6 +4,8 @@ import { useAuth } from "../contexts/AuthContext";
 import { toast } from "react-toastify";
 import "./AuthPage.css";
 
+import { getKoreanErrorMessage } from "../utils/errorMapper";
+
 const SignupPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,9 +22,8 @@ const SignupPage = () => {
       toast.success("가입이 완료되었습니다!");
       navigate("/login");
     } catch (err) {
-      toast.error(
-        err.message || "회원가입 실패. 다시 시도해주세요.(중복 확인)"
-      );
+      const msg = getKoreanErrorMessage(err);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

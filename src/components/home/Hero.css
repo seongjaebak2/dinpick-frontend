@@ -2,7 +2,8 @@
    HERO
    ========================= */
 .hero {
-  padding: 32px 0 18px;
+  padding: 40px 0 24px;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.1);
 }
 
 /* 2컬럼 레이아웃 (텍스트 / 이미지) */
@@ -23,88 +24,120 @@
 
 .hero-title {
   margin: 0;
-  font-size: clamp(28px, 3.2vw, 44px);
-  letter-spacing: -0.9px;
-  line-height: 1.08;
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 900;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #1f2937 0%, #ef4444 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-subtitle {
   margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 600;
+  position: relative;
+  letter-spacing: 0.3px;
+  background: linear-gradient(135deg, #6b7280 0%, #ef4444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle::before {
+  content: "✨ ";
+  display: inline;
+  margin-right: 6px;
+  animation: float 2.5s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 /* =========================
    Search
    ========================= */
 .hero-search {
-  margin-top: 8px;
+  margin-top: 20px;
 
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 
-  padding: 10px 10px 10px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
+  padding: 12px 12px 12px 18px;
+  border-radius: 16px;
+  border: 2px solid var(--border);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
 
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 /* wrapper에 포커스가 들어오면 강조 */
 .hero-search:focus-within {
-  border-color: rgba(59, 130, 246, 0.45);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+  border-color: #ef4444;
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
+  transform: translateY(-2px);
 }
 
 .hero-search input {
   flex: 1;
-  height: 42px;
+  height: 44px;
 
   border: 0;
   outline: 0;
   background: transparent;
 
-  font-size: 14px;
+  font-size: 15px;
   color: #111827;
+  font-weight: 500;
 }
 
 .hero-search input::placeholder {
-  color: #9ca3af;
+  color: #d1d5db;
 }
 
 .hero-search button {
-  height: 42px;
-  padding: 0 18px;
+  height: 44px;
+  padding: 0 24px;
 
   border: 0;
-  border-radius: 999px;
-  background: var(--primary);
-  color: #111827;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
 
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
 
-  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .hero-search button:hover {
-  transform: translateY(-1px);
-  filter: brightness(0.98);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.4);
 }
 
 .hero-search button:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
 }
 
 .hero-search button:disabled {
-  opacity: 0.45;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
-  filter: none;
 }
 
 /* =========================
@@ -112,17 +145,23 @@
    ========================= */
 .hero-image {
   width: 100%;
-  border-radius: var(--radius);
+  border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--surface);
-  box-shadow: var(--shadow);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 
   /* ⭐ 핵심: 비율 고정으로 절대 안 부서짐 */
   aspect-ratio: 16 / 10;
 
   /* 너무 커지는 것 방지 */
-  max-height: 340px;
+  max-height: 380px;
+  transition: all 0.3s ease;
+}
+
+.hero-image:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+  transform: translateY(-4px);
 }
 
 .hero-image img {
@@ -130,6 +169,11 @@
   height: 100%;
   display: block;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.hero-image:hover img {
+  transform: scale(1.05);
 }
 
 /* =========================

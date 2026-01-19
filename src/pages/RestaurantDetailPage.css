@@ -4,6 +4,13 @@
 
 .detail-not-found-title {
   margin: 16px 0 10px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #1f2937 0%, #ef4444 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* Page grid layout */

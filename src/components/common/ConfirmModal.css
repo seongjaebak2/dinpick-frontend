@@ -21,8 +21,8 @@
   border-radius: 18px;
   overflow: hidden;
 
-  border: 1px solid rgba(229, 231, 235, 0.9);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(239, 68, 68, 0.12);
+  box-shadow: 0 12px 32px rgba(239, 68, 68, 0.12);
 
   position: relative;
   z-index: 100000;
@@ -32,16 +32,19 @@
 /* 헤더 */
 .cm-header {
   padding: 18px 20px 12px;
-  border-bottom: 1px solid #f1f5f9;
-  background: linear-gradient(to bottom, #ffffff, #fbfbfc);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.08);
+  background: linear-gradient(to bottom, #ffffff, #fafafa);
 }
 
 .cm-title {
   margin: 0;
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.3px;
-  color: #111827;
+  background: linear-gradient(135deg, #1f2937 0%, #ef4444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* 본문 */
@@ -68,8 +71,8 @@
   gap: 10px;
 
   padding: 14px 20px 18px;
-  border-top: 1px solid #f1f5f9;
-  background: #fff;
+  border-top: 1px solid rgba(239, 68, 68, 0.08);
+  background: #fafafa;
 }
 
 /* 버튼 공통 */
@@ -78,13 +81,14 @@
   padding: 0 16px;
   border-radius: 12px;
 
-  font-weight: 900;
+  font-weight: 700;
   font-size: 13px;
   letter-spacing: -0.2px;
 
   cursor: pointer;
-  border: 1px solid #e5e7eb;
+  border: none;
   background: #fff;
+  transition: all 0.3s ease;
 }
 
 .cm-btn:disabled {
@@ -94,24 +98,26 @@
 
 /* 취소 버튼 */
 .cm-cancel {
-  background: #f9fafb;
-  color: #111827;
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
 }
 
 .cm-cancel:hover:not(:disabled) {
-  background: #f3f4f6;
+  background: #e5e7eb;
+  transform: translateY(-1px);
 }
 
 /* 확인 버튼 (강조) */
 .cm-confirm {
-  border: none;
-  background: #111827;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: #fff;
-  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.18);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
 }
 
 .cm-confirm:hover:not(:disabled) {
-  filter: brightness(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
 }
 
 /* 모바일 대응 */
@@ -125,10 +131,12 @@
     width: 100%;
   }
 }
+
 @keyframes cm-fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -139,6 +147,7 @@
     opacity: 0;
     transform: translateY(10px) scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);

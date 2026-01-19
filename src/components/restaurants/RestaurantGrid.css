@@ -1,26 +1,29 @@
 .restaurant-grid {
-  margin-top: 18px;
+  margin-top: 24px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 24px;
 }
 
 .restaurant-empty {
-  margin-top: 18px;
-  padding: 18px;
-  border: 1px solid #eee;
-  border-radius: 14px;
-  background: #fafafa;
+  margin-top: 40px;
+  padding: 40px;
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  background: #f9fafb;
+  text-align: center;
 }
 
 .restaurant-empty-title {
-  font-weight: 900;
-  margin-bottom: 6px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #111827;
 }
 
 .restaurant-empty-desc {
-  font-size: 13px;
-  color: #666;
+  font-size: 14px;
+  color: #6b7280;
 }
 
 @media (max-width: 900px) {

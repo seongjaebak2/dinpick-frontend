@@ -175,11 +175,27 @@ const DetailMapCard = ({ restaurant }) => {
           marker.setPosition(pos);
 
           // (선택) 인포윈도우
+          // (선택) 인포윈도우 -> 커스텀 오버레이로 변경 (더 예쁜 스타일)
           if (name) {
-            const iw = new kakao.maps.InfoWindow({
-              content: `<div style="padding:6px 8px;font-size:12px;">${name}</div>`,
+            const content = document.createElement("div");
+            content.className = "custom-map-info";
+            content.innerHTML = `
+              <div class="custom-map-info-title">${name}</div>
+              <div class="custom-map-info-tail"></div>
+            `;
+
+            // ✅ 말풍선 클릭 시 지도 중심으로 이동
+            content.addEventListener("click", () => {
+              map.panTo(marker.getPosition());
             });
-            iw.open(map, marker);
+
+            const overlay = new kakao.maps.CustomOverlay({
+              content: content,
+              map: map,
+              position: marker.getPosition(),
+              yAnchor: 2.4, // 마커 위로 띄우기
+              zIndex: 3,
+            });
           }
         });
 

@@ -1,157 +1,132 @@
 .filter-bar {
-  margin-top: 18px;
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid rgba(239, 68, 68, 0.1);
+  border-radius: 20px;
   display: grid;
-  gap: 14px;
-  background: var(--surface);
+  gap: 20px;
+  background: #fff;
   overflow: visible;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.03);
 }
 
 .filter-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
 }
 
 .filter-title {
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: -0.2px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #111827;
 }
 
 .filter-select {
-  height: 38px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--bg);
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fafafa;
   outline: none;
-  font-size: 12px;
+  font-size: 13px;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+.filter-select:focus {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: #fff;
 }
 
 .filter-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .filter-chip {
-  border: 1px solid var(--border);
-  background: var(--bg);
-  padding: 8px 12px;
-  border-radius: 999px;
-  font-size: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  /* Neutral border */
+  background: #ffffff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 13px;
   cursor: pointer;
-  transition: transform 0.12s ease, border-color 0.12s ease,
-    background 0.12s ease;
+  transition: all 0.2s ease;
+  color: #4b5563;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .filter-chip:hover {
   transform: translateY(-1px);
-  border-color: rgba(17, 17, 17, 0.18);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  background: #fef2f2;
 }
-.filter-chip.active:hover {
-  filter: brightness(0.95);
-  transform: translateY(-1px);
-}
+
 .filter-chip.active {
-  background: #111827;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: #ffffff;
-  border-color: #111827;
-  font-weight: 800;
+  border-color: #dc2626;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
 }
 
-.filter-meta {
-  font-size: 12px;
-  color: var(--muted);
-  display: flex;
-  gap: 6px;
-  align-items: center;
+.filter-chip.active:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.35);
 }
 
-.filter-value {
-  font-weight: 900;
-  color: var(--text);
-}
-
-.filter-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 14px;
-  align-items: center;
-}
-
-/* 오른쪽: Filters 텍스트 + select 정렬은 옆으로 */
-.filter-top {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  justify-content: flex-end;
-  min-width: 320px;
-}
-
-/* 왼쪽: 검색창 */
 .filter-search {
-  margin-top: 12px;
-
+  margin-top: 16px;
   display: flex;
   align-items: center;
   gap: 10px;
-
-  padding: 10px 10px 10px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-
-  /* 기본 상태에서도 그림자 */
-  box-shadow: 0 4px 14px rgba(17, 24, 39, 0.08);
-
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 8px 8px 8px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
 }
 
-/* wrapper 포커스 */
 .filter-search:focus-within {
-  border-color: rgba(59, 130, 246, 0.45);
-  box-shadow: 0 2px 10px rgba(17, 24, 39, 0.06);
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.08);
+  transform: translateY(-1px);
 }
 
 .filter-search input {
   flex: 1;
-  height: 42px;
-
+  height: 44px;
   border: 0;
   outline: 0;
   background: transparent;
-
   font-size: 14px;
   color: #111827;
 }
 
-.filter-search input::placeholder {
-  color: #9ca3af;
-}
-
 .filter-search button {
-  height: 42px;
-  padding: 0 18px;
-
+  height: 40px;
+  padding: 0 20px;
   border: 0;
-  border-radius: 999px;
-  background: var(--primary);
-  color: #111827;
-
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #fff;
   cursor: pointer;
-  font-weight: 800;
-
-  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+  transition: all 0.2s ease;
 }
 
 .filter-search button:hover {
   transform: translateY(-1px);
-  filter: brightness(0.98);
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.3);
 }
 
 .filter-search button:active {

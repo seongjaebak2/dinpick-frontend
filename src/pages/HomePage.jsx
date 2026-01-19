@@ -13,13 +13,14 @@ const HomePage = () => {
     <Layout>
       <Hero />
 
+      <div className="section-header">
+        <h2>추천 식당</h2>
+      </div>
+
       <CategoryChips
         selectedCategory={homeCategory}
         onCategoryChange={({ category }) => setHomeCategory(category)}
       />
-      <div className="section-header">
-        <h2>추천 식당</h2>
-      </div>
 
       <SectionGrid category={homeCategory} />
       <div className="section-header">

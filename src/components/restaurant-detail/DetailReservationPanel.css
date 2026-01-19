@@ -1,48 +1,66 @@
 .detail-reservation {
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
   background: #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
-  padding: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+  padding: 24px;
   display: grid;
-  gap: 10px;
+  gap: 16px;
 }
 
 .detail-reservation-title {
-  font-weight: 950;
-  letter-spacing: -0.2px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: 18px;
+  color: #111827;
 }
 
 .detail-field {
   display: grid;
-  gap: 6px;
+  gap: 8px;
 }
 
 .detail-field-label {
-  font-size: 12px;
-  color: #6b7280;
-  font-weight: 900;
+  font-size: 13px;
+  color: #374151;
+  font-weight: 600;
 }
 
 .detail-input,
 .detail-select {
-  height: 38px;
-  padding: 0 12px;
+  height: 44px;
+  padding: 0 14px;
   border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  background: #fafafa;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
   outline: none;
-  font-size: 13px;
+  font-size: 14px;
+  color: #111827;
+  transition: all 0.2s ease;
+}
+
+.detail-input:focus,
+.detail-select:focus {
+  border-color: rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
 }
 
 .detail-primary-button {
-  height: 42px;
+  height: 48px;
   border-radius: 12px;
   border: none;
-  background: #ef4444;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: #fff;
-  font-weight: 950;
+  font-weight: 700;
+  font-size: 15px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.detail-primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
 }
 
 .detail-reservation-note {

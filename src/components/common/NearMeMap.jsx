@@ -205,10 +205,15 @@ export default function NearMeMap({
     wrap.style.fontSize = "13px";
     wrap.style.lineHeight = "1.25";
 
-    // ✅ 오버레이 내부 클릭이 지도 이벤트로 전파되지 않게 차단
+    // ✅ 오버레이 내부 클릭이 지도 이벤트로 전파되지 않게 차단 + 클릭 시 중심 이동
     ["click", "mousedown", "mouseup", "touchstart", "touchend"].forEach(
       (evt) => {
-        wrap.addEventListener(evt, (e) => e.stopPropagation());
+        wrap.addEventListener(evt, (e) => {
+          e.stopPropagation();
+          if (evt === "click") {
+            map.panTo(positionLatLng); // ✅ 말풍선 클릭 시 지도 중심 이동
+          }
+        });
       }
     );
 
@@ -490,6 +495,7 @@ export default function NearMeMap({
           marker.setMap(map);
 
           kakao.maps.event.addListener(marker, "click", () => {
+            map.panTo(pos); // ✅ 마커 클릭 시 지도 중심 이동
             showRestaurantOverlay(r, pos);
           });
 
@@ -524,20 +530,44 @@ export default function NearMeMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /* 
+    Smart Search Logic:
+    1. 검색어가 있으면 -> 주소(지역명)인지 먼저 확인 (Geocoding)
+    2. 좌표가 나오면 -> "그 좌표 기준 가까운순"으로 이동 (/restaurants?lat=...&lng=...&sort=distance&locName=...)
+    3. 좌표 없으면 -> "키워드 검색"으로 이동 (/restaurants?keyword=...)
+  */
   const handleNearbySearchSubmit = (e) => {
     e.preventDefault();
     const kw = q.trim();
 
-    const params = new URLSearchParams();
-    if (kw) params.set("keyword", kw);
+    if (!kw) {
+      // 1) 검색어 없음 -> 내 위치 기준 가까운순 (기존 로직)
+      const params = new URLSearchParams();
+      params.set("sort", "distance");
+      navigate(`/restaurants?${params.toString()}`);
+      return;
+    }
 
-    // RestaurantsPage에서 가까운순으로 열리게
-    params.set("sort", "distance");
-
-    // (선택) 카테고리도 같이 넘기고 싶으면:
-    // if (category && category !== "ALL") params.set("category", category);
-
-    navigate(`/restaurants?${params.toString()}`);
+    // 2) 검색어 있음 -> 주소 검색 시도
+    const geocoder = new window.kakao.maps.services.Geocoder();
+    geocoder.addressSearch(kw, (result, status) => {
+      // 2-1) 주소/지역명 검색 성공
+      if (status === window.kakao.maps.services.Status.OK && result.length > 0) {
+        const { x, y } = result[0]; // lng, lat
+        // 좌표 기준 검색으로 이동
+        const params = new URLSearchParams();
+        params.set("lat", y);
+        params.set("lng", x);
+        params.set("sort", "distance");
+        params.set("locName", kw); // "부산", "강남구" 등 표시용
+        navigate(`/restaurants?${params.toString()}`);
+      } else {
+        // 2-2) 주소 아님 -> 일반 키워드(메뉴/가게명) 검색
+        const params = new URLSearchParams();
+        params.set("keyword", kw);
+        navigate(`/restaurants?${params.toString()}`);
+      }
+    });
   };
   return (
     <section className="nearby-section">

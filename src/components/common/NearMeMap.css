@@ -2,6 +2,11 @@
    NearMeMap Section Layout
    ========================= */
 
+.nearby-section {
+  padding: 24px 0;
+  background: #ffffff;
+}
+
 /* 타이틀 줄 */
 .nearby-header {
   text-align: center;
@@ -31,85 +36,84 @@
    ========================= */
 
 .nearby-search-wrap {
-  /* Hero container와 비슷한 좌우 여백 */
   padding: 0 16px;
-  margin: 0 auto 12px;
-
-  /* 프로젝트 컨테이너 폭과 맞추기 (필요시 조절) */
+  margin: 0 auto 20px;
   max-width: 1200px;
-
-  /* Hero처럼 왼쪽 정렬 (원하면 center로 변경) */
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 /* 검색창 자체: wrap 기준으로 max-width 제한 */
 .nearby-search {
   width: 100%;
-  max-width: 720px; /* ⭐ 체감상 Hero 검색창 폭 */
-  margin: 0 auto;
+  max-width: 520px;
 
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 
-  padding: 10px 10px 10px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
+  padding: 12px 12px 12px 18px;
+  border-radius: 16px;
+  border: 2px solid var(--border);
   background: var(--surface);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+  transition: all 0.3s ease;
 }
 
 /* 포커스 강조는 Hero와 동일 톤 */
 .nearby-search:focus-within {
-  border-color: rgba(59, 130, 246, 0.45);
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+  border-color: #ef4444;
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
+  transform: translateY(-2px);
 }
 
 .nearby-search input {
   flex: 1;
-  height: 42px;
+  height: 44px;
 
   border: 0;
   outline: 0;
   background: transparent;
 
-  font-size: 14px;
+  font-size: 15px;
   color: #111827;
+  font-weight: 500;
 }
 
 .nearby-search input::placeholder {
-  color: #9ca3af;
+  color: #d1d5db;
 }
 
 .nearby-search button {
-  height: 42px;
-  padding: 0 18px;
+  height: 44px;
+  padding: 0 24px;
 
   border: 0;
-  border-radius: 999px;
-  background: var(--primary);
-  color: #111827;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
 
   cursor: pointer;
-  font-weight: 800;
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
 
-  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .nearby-search button:hover {
-  transform: translateY(-1px);
-  filter: brightness(0.98);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.4);
 }
 
 .nearby-search button:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
 }
 
 .nearby-search button:disabled {
-  opacity: 0.45;
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
-  filter: none;
 }
 
 /* =========================
@@ -120,9 +124,11 @@
 
 .nearby-map {
   width: 100%;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
 }
 
 /* =========================
@@ -130,25 +136,29 @@
    ========================= */
 
 .nearby-message {
-  margin-top: 10px;
-  padding: 12px;
+  margin-top: 14px;
+  padding: 14px 16px;
   border-radius: 12px;
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 1.5;
   background: var(--surface);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: rgba(17, 24, 39, 0.78);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .nearby-message.error {
-  border-color: rgba(239, 68, 68, 0.35);
-  color: rgba(127, 29, 29, 0.95);
-  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #7f1d1d;
+  background: rgba(239, 68, 68, 0.08);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.1);
 }
 
 .nearby-message.info {
-  border-color: rgba(0, 0, 0, 0.08);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #b91c1c;
+  background: rgba(239, 68, 68, 0.06);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.1);
 }
 
 /* =========================
@@ -165,6 +175,10 @@
 }
 
 @media (max-width: 480px) {
+  .nearby-search-wrap {
+    margin-bottom: 16px;
+  }
+
   .nearby-search {
     padding: 10px;
   }
@@ -172,5 +186,18 @@
   .nearby-search input,
   .nearby-search button {
     height: 40px;
+  }
+
+  .nearby-search input {
+    font-size: 14px;
+  }
+
+  .nearby-search button {
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
+  .nearby-map {
+    border-radius: 12px;
   }
 }

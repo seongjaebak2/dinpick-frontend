@@ -27,12 +27,17 @@ const RestaurantsPage = () => {
   // ✅ 가까운순이면 위치 필요
   const { loaded: geoLoaded, coords, error: geoError } = useGeolocation();
 
+  // ✅ URL 파라미터에서 커스텀 좌표(지역 검색 결과) 확인
+  const customLat = searchParams.get("lat");
+  const customLng = searchParams.get("lng");
+  const locName = searchParams.get("locName");
+
   const isDistance = sortOption === "distance";
 
   // keyword/category/sortOption 바뀌면 첫 페이지로
   useEffect(() => {
     setPage(0);
-  }, [keyword, category, sortOption]);
+  }, [keyword, category, sortOption, customLat, customLng]);
 
   useEffect(() => {
     setSortOption(searchParams.get("sort") ?? "recommended");
@@ -48,6 +53,25 @@ const RestaurantsPage = () => {
       try {
         // ✅ 가까운순: nearby 호출
         if (isDistance) {
+
+          // 1) URL에 지정된 좌표가 있으면 최우선 사용 (예: "부산" 검색 결과)
+          if (customLat && customLng) {
+            setHint(`'${locName || "지정된 위치"}' 기준 주변 맛집입니다.`);
+            const res = await fetchNearbyRestaurants({
+              lat: Number(customLat),
+              lng: Number(customLng),
+              radiusKm: NEARBY_RADIUS_KM,
+              keyword, // "부산" 검색 후 추가 키워드 없이 리스트만 볼 경우엔 빈값일 수 있음
+              category,
+              page,
+              size: PAGE_SIZE,
+            });
+            if (cancelled) return;
+            setData(res);
+            return;
+          }
+
+          // 2) URL 좌표 없으면 -> 내 현재 위치(geo) 사용
           // 위치 로딩 중이면 대기
           if (!geoLoaded) {
             setHint("내 위치를 확인하는 중...");

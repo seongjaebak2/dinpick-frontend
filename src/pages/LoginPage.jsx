@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { useAuth } from "../contexts/AuthContext";
 import "./AuthPage.css"; // 공용 CSS (로그인/회원가입 같이 사용 추천)
 
+import { getKoreanErrorMessage } from "../utils/errorMapper";
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,8 +31,9 @@ const LoginPage = () => {
       // 로그인 후 원래 있던 페이지로 복귀
       navigate(redirectTo, { replace: true });
     } catch (err) {
-      console.error("LOGIN ERROR:", err?.response?.data || err);
-      toast.error(err?.message || "로그인 실패 (이메일/비밀번호 확인)");
+      console.error("LOGIN ERROR:", err);
+      const msg = getKoreanErrorMessage(err);
+      toast.error(msg);
     } finally {
       setSubmitting(false);
     }

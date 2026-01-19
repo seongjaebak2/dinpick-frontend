@@ -3,7 +3,7 @@
 .detail-map-hero {
   position: relative;
   width: 100%;
-  height: 260px;
+  height: 400px;
   border-radius: 14px;
   overflow: hidden;
   margin-top: 10px;
@@ -16,41 +16,55 @@
   width: 100%;
   height: 100%;
   background: #f3f4f6;
-  z-index: 1; /* ✅ 지도 레이어 */
+  z-index: 1;
+  /* ✅ 지도 레이어 */
 }
 
 /* 오버레이는 항상 위 */
 .detail-map-hero-overlay {
   position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
 
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 12px;
-  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 20px;
 
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 
-  z-index: 10; /* 무조건 지도 위 */
-  pointer-events: none; /* 오버레이가 지도 드래그를 방해하지 않음  */
+  z-index: 10;
+  pointer-events: none;
 }
 
 .detail-map-text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .detail-map-name {
-  font-weight: 700;
-  font-size: 14px;
+  font-weight: 800;
+  font-size: 16px;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 📍 아이콘 추가 */
+.detail-map-name::before {
+  content: "📍";
+  font-size: 18px;
 }
 
 .detail-map-address {
-  font-size: 13px;
-  color: #6b7280;
+  font-size: 14px;
+  color: #4b5563;
+  margin-left: 2px;
+  font-weight: 500;
 }
 
 /* 힌트 영역 */
@@ -59,12 +73,15 @@
   font-size: 13px;
   color: #6b7280;
 }
+
 /* 카카오 CustomOverlay가 다른 레이어에 묻히는 문제 방지 */
 .my-loc-wrap {
   position: relative;
   z-index: 9999 !important;
-  pointer-events: none; /* 내 위치 도트는 클릭 불필요 */
-  transform: translateZ(0); /* 레이어 분리(브라우저 렌더링 안정화) */
+  pointer-events: none;
+  /* 내 위치 도트는 클릭 불필요 */
+  transform: translateZ(0);
+  /* 레이어 분리(브라우저 렌더링 안정화) */
 }
 
 /* 기존 my-loc 스타일은 그대로 써도 됨 */
@@ -95,12 +112,50 @@
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.85;
   }
+
   70% {
     transform: translate(-50%, -50%) scale(3.6);
     opacity: 0;
   }
+
   100% {
     transform: translate(-50%, -50%) scale(3.6);
     opacity: 0;
   }
+}
+
+/* =========================
+   Custom Map InfoWindow
+   ========================= */
+.custom-map-info {
+  background: #fff;
+  padding: 8px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.1);
+  position: relative;
+  animation: cm-fadeIn 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-map-info-title {
+  font-weight: 800;
+  font-size: 13px;
+  color: #111827;
+  white-space: nowrap;
+}
+
+/* 말풍선 꼬리 */
+.custom-map-info-tail {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.1);
+  border-right: 1px solid rgba(239, 68, 68, 0.1);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.03);
 }
