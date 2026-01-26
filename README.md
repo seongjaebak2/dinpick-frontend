@@ -102,3 +102,105 @@ src
 │   └── ProtectedRoute.jsx      # 인증 필요 페이지 보호 라우트
 └── main.jsx                    # React 애플리케이션 엔트리 포인트
 ```
+
+---
+
+## 🚀 시작하기
+
+### 사전 요구사항
+
+- Node.js 18 이상
+- npm 또는 yarn
+- 백엔드 API 서버 실행 상태
+
+### 애플리케이션 실행
+
+```bash
+npm install
+npm run dev
+```
+
+## 환경 변수
+
+| 설정                | 설명                 | 기본값                    |
+| ------------------- | -------------------- | ------------------------- |
+| `VITE_API_BASE_URL` | 백엔드 API 서버 주소 | http://localhost:8080/api |
+
+## API 엔드포인트
+
+### 인증 (Auth)
+
+- `POST /api/auth/signup` - 회원가입
+- `POST /api/auth/login` - 로그인
+- `POST /api/auth/logout` - 로그아웃
+- `POST /api/auth/refresh` - Access Token 갱신
+
+### 회원 (Member)
+
+- `GET /api/members/me` - 내 정보 조회
+- `PUT /api/members/me` - 내 정보 수정
+- `DELETE /api/members/me` - 회원 탈퇴
+- `GET /api/members` - 전체 회원 조회 (관리자)
+- `GET /api/members/{id}` - 특정 회원 조회 (관리자)
+- `POST /api/members/{id}/restore` - 회원 복구 (관리자)
+- `GET /api/members/withdrawn` - 탈퇴 회원 목록 조회 (관리자)
+
+### 마이페이지 (MyPage)
+
+- `GET /api/me/reservations` - 내 예약 목록 조회
+
+### 레스토랑 (Restaurant)
+
+- `GET /api/restaurants` - 레스토랑 목록 조회 및 검색
+- `GET /api/restaurants/{id}` - 레스토랑 상세 조회
+- `GET /api/restaurants/nearby` - 주변 레스토랑 검색 (위치 기반)
+
+### 예약 (Reservation)
+
+- `GET /api/reservations/availability` - 예약 가능 여부 확인
+- `POST /api/reservations` - 예약 생성
+- `GET /api/reservations/my` - 내 예약 목록 조회
+- `PUT /api/reservations/{id}` - 예약 수정
+- `DELETE /api/reservations/{id}` - 예약 취소
+
+## 테스트
+
+```bash
+npm run test
+```
+
+## 개발 참고사항
+
+### JWT 인증 흐름
+
+1. 로그인 성공 시 Access Token과 Refresh Token을 전달받습니다.
+2. API 요청 시 `Authorization: Bearer {accessToken}` 헤더를 포함합니다.
+3. Access Token 만료 시 Refresh Token으로 재발급을 요청합니다.
+4. 인증이 필요한 페이지는 `ProtectedRoute`로 보호됩니다.
+
+### 예외 처리
+
+- API 요청 실패 시 사용자에게 오류 메시지를 표시합니다.
+- 인증 실패(401) 시 로그인 페이지로 이동합니다.
+- 로딩/성공/실패 상태에 따라 UI를 분기 처리합니다.
+
+### 위치 기반 기능
+
+- `useGeolocation` 훅을 사용해 사용자 위치를 조회합니다.
+- 위치 기반 레스토랑 검색 API와 연동하여 거리순 결과를 표시합니다.
+
+## 기여
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 라이선스
+
+이 프로젝트는 팀 프로젝트입니다.
+
+## 연락처
+
+프로젝트 관련 문의사항이 있으시면 이슈를 등록해주세요.
